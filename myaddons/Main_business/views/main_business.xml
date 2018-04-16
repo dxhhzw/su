@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+        <!--工作流的创建-->
+        <record model="workflow" id="workflow_main_business">
+            <field name="name">Main Business workflow</field>
+            <field name="osv">su.business.list</field>
+            <field name="on_create">True</field>
+        </record>
+        <!--搜索视图-->
+        <record id="view_main_business_search" model="ir.ui.view">
+            <field name="name">Main Business search</field>
+            <field name="model">su.business.list</field>
+            <field name="arch" type="xml">
+                <search>
+                    <!--搜索视图-->
+                    <field name="name" string="主业务单"/>
+                    <!--筛选-->
+                    <filter string="主业务单-222" domain="[('name','=','222')]"/>
+                </search>
+            </field>
+        </record>
+        <!--tree视图-->
+        <record id="view_tree_main_business" model="ir.ui.view">
+            <field name="name">Main Business Tree</field>
+            <field name="model">su.business.list</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="partner_ref"/>
+                    <field name="desc"/>
+                </tree>
+            </field>
+        </record>
+        <!--form视图-->
+        <record id="view_form_main_business" model="ir.ui.view">
+            <field name="name">Mian Business form</field>
+            <field name="model">su.business.list</field>
+            <field name="arch" type="xml">
+                <form string="Main Business" version="7.0" create1="false" style="padding:0px;margin:0px;">
+                    <header>
+                        <!--button调用-->
+                        <!--
+                        <button name="do_toggle_done"  type="object"  string="Toggle Done" class="oe_highlight"/>
+                        -->
+                        <button name="mb_draft" type="object" string="确认" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        		<h1>
+			                      <lable string="业务单"/>
+		                        </h1>
+                        <group name="group_top">
+                            <group name="group_left" style="margin:0px;">
+                                <field name="order_date"      string="订单日期"/>
+                                <field name="partner_id"      string="客户名称"/>
+                                <field name="contact_id"      string="联系人"/>
+                                <field name="partner_ref" string="客户单号"/>
+                                <field name="trade_type" string="业务模式"/>
+                            </group>
+                            <group>
+                                <field name="contract_id"      string="合同号"/>
+                                <field name="agent_id"      string="所属代理"/>
+                                <field name="service_section_id" string="商务团队"/>
+                                <field name="company_id" string="所属公司"/>
+                                <field name="create_uid" string="单据创建"/>
+                                <field name="pricelist_id" string="价格表"/>
+                                <field name="err_msg" string="异常信息"/>
+                                <field name="desc" string="备注"/>
+                            </group>
+                        </group>
+                        <group>
+                            <div class="zl">
+                                <span>商务指令</span>
+                                <div>
+                                    <field name="need_my" string="贸易"/>
+                                    <field name="need_cg" string="采购"/>
+                                    <field name="need_xs" string="销售"/>
+                                    <field name="need_df" string="代付"/>
+                                </div>
+                            </div>
+                            <div>
+                                <span>关务指令</span>
+                                <div>
+                                    <field name="need_bj" string="需要报检"/>
+                                    <field name="need_hd" string="需要换单"/>
+                                    <field name="need_sj" string="送检"/>
+                                    <field name="need_jksw" string="进口税务"/>
+                                    <field name="need_cksw" string="出口税务"/>
+                                    <field name="need_xggw" string="香港关务"/>
+                                </div>
+                            </div>
+                        </group>
+                        <group>
+                            <div class="zl">
+                                <span>物流指令</span>
+                                <div>
+                                    <field name="need_dc" string="订车"/>
+                                    <field name="need_ys" string="运输"/>
+                                </div>
+                            </div>
+                            <div>
+                                <span>仓库指令</span>
+                                <div>
+                                    <field name="need_rkzl" string="入库指令"/>
+                                    <field name="need_ckzl" string="出库指令"/>
+                                    <field name="need_dkzl" string="调库指令"/>
+                                    <field name="need_hb" string="换标"/>
+                                    <field name="need_tb" string="贴标"/>
+                                    <field name="need_dt" string="打托"/>
+                                    <field name="need_zzfw" string="增值服务"/>
+                                    <field name="need_df" string="装卸"/>
+                                </div>
+                            </div>
+                        </group>
+                        <group>
+                            <div>
+                                <span>是散货</span>
+                                <field name="need_sh" string="是散货"/>
+                            </div>
+                            <div>
+                                <span>是集装箱</span>
+                                <field name="need_jzx" string="是集装箱"/>
+                            </div>
+                        </group>
+                    </sheet>
+                    <notebook>
+                        <page string="货物信息">
+                            <field name="hwxx"/>
+                        </page>
+                    </notebook>
+                    <div class="view"><table class="table" contenteditable="true">
+	<thead>
+		<tr>
+			<th>业务单</th>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>1</td>
+			<td>业单务</td>
+			<td>01/04/2012</td>
+			<td>Default</td>
+		</tr>
+		<tr class="success">
+			<td>1</td>
+			<td>TB - Monthly</td>
+			<td>01/04/2012</td>
+			<td>Approved</td>
+		</tr>
+		<tr class="error">
+			<td>2</td>
+			<td>TB - Monthly</td>
+			<td>02/04/2012</td>
+			<td>Declined</td>
+		</tr>
+		<tr class="warning">
+			<td>3</td>
+			<td>TB - Monthly</td>
+			<td>03/04/2012</td>
+			<td>Pending</td>
+		</tr>
+		<tr class="info">
+			<td>4</td>
+			<td>TB - Monthly</td>
+			<td>04/04/2012</td>
+			<td>Call in to confirm</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+                    <!--查看widget小部件的效果-->
+                    <!--
+                    <div class="oe_chatter">
+                        <field name="name" widget="mail_followers"></field>
+                        <field name="partner_ref"  widget="mail_thread"/>
+                    </div>
+                    -->
+                </form>
+            </field>
+        </record>
+        <!--视图动作-->
+        <record id="act_main_business_first" model="ir.actions.act_window">
+            <field name="name">客户服务</field>
+            <field name="res_model">su.business.list</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="type_mode">tree,form</field>
+            <field name="view_id" ref = "view_tree_main_business"/>
+        </record>
+        <!--顶级菜单-->
+        <menuitem id="menu_khfw" name="客户服务" sequence="20"/>
+        <!--二级菜单-->
+        <menuitem id="menu_main_business"  name="主业管理"  parent="menu_khfw"  sequence="1" />
+        <!--二级菜单下的子菜单-->
+        <menuitem id="menu_main_business_first" name="业务主单" parent="menu_main_business" sequence="1" action="act_main_business_first"/>
+    </data>
+</openerp>
